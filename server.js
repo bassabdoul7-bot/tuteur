@@ -10,7 +10,7 @@ const subscriptionRoutes = require("./routes/subscription");
 
 const app = express();
 
-// Middleware - Allow all CORS
+// Middleware
 app.use(cors({
   origin: '*',
   credentials: true
@@ -32,9 +32,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/subscription", subscriptionRoutes);
 
-// Listen on 0.0.0.0 so it accepts external connections
+// Use Railway PORT or default to 5000
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`🚀 Tuteur AI Backend running on http://0.0.0.0:${PORT}`);
-  console.log(`📱 For emulator use: http://10.0.2.2:${PORT}`);
+  console.log(`🚀 Tuteur AI Backend running on port ${PORT}`);
+  console.log(`📱 MongoDB: ${process.env.MONGODB_URI ? 'Atlas' : 'Local'}`);
 });
